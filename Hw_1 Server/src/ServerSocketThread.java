@@ -74,7 +74,7 @@ public class ServerSocketThread extends Thread {
 
     private void handlingTime() {
         try {
-            Thread.sleep(10000L);
+            Thread.sleep(5000L);
         } catch (InterruptedException e) {
 
         }
