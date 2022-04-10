@@ -27,7 +27,7 @@ public class ServerSocketThread extends Thread {
             out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())); // 출력스트림 생성
             String request = receive(in); // Client(http)로부터 데이터 읽어옴
 
-//            System.out.println("Client로부터 온 메세지 : " + request);
+            System.out.println("Client로부터 온 메세지 : " + request);
             String response = handle(request);
             send(out, response); //응답을 client(http)에 보낸다.
             System.out.println(response);
@@ -53,7 +53,7 @@ public class ServerSocketThread extends Thread {
         String responseFile;
 
         // message가 GET인지 확인, httpVersion 확인
-        responseFile = checkResponseType(index);
+        responseFile = checkRequestType(index);
 
         //html response 형식에 따라 구현
         //이렇게 구현해야 페이지에서 이 response가 적절하다고 판단해 응답한다.
@@ -65,9 +65,7 @@ public class ServerSocketThread extends Thread {
                 "Content-Type: text/html\n" +
                 "Connection: Closed\n\n" +
                 responseFile;
-
-//        System.out.println(responseFile);
-
+        //System.out.println(responseFile);
         handlingTime();
         return response;
     }
@@ -81,7 +79,7 @@ public class ServerSocketThread extends Thread {
     }
 
     //응답 형태 확인
-    private String checkResponseType(String[] index) throws IOException {
+    private String checkRequestType(String[] index) throws IOException {
         String responseFile;
         String filePath;
         if ((index[0].equals("GET")) & index[2].equals("HTTP/1.1")) {
